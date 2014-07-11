@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+$:.unshift(File.expand_path('../../lib', __FILE__))
+require File.expand_path('../../config/environment', __FILE__)
+
+
+require 'rubygems'
+require 'redis'
+require 'json'
+require 'nokogiri'
+require 'active_support/core_ext/hash/conversions'
+require 'dispatcher'
+
+class Subscriber
+  def initialize
+    @redis = Redis.new
+    @dispatcher = Dispatcher.new
+  end
+
+  def subscribe!
+    @redis.subscribe('whatsapp') do |on|
+      on.message do |channel, msg|
+        begin
+          hash = Hash.from_xml(msg)
+          @dispatcher.dispatch(hash)
+        rescue => e
+          p e.class
+          require 'pp'
+          pp e.backtrace
+          pp hash
+          pp msg
+        end
+      end
+    end
+  end
+end
+
+Subscriber.new.subscribe!
