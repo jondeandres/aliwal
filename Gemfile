@@ -39,5 +39,6 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'redis'
+gem 'ffi-rzmq'
 gem 'nokogiri'
 gem 'byebug'

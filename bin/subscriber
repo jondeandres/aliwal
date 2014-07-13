@@ -4,7 +4,7 @@ require File.expand_path('../../config/environment', __FILE__)
 
 
 require 'rubygems'
-require 'redis'
+require 'ffi-rzmq'
 require 'json'
 require 'nokogiri'
 require 'active_support/core_ext/hash/conversions'
@@ -12,24 +12,32 @@ require 'dispatcher'
 
 class Subscriber
   def initialize
-    @redis = Redis.new
+    @context = ZMQ::Context.new
+    @socket = @context.socket(ZMQ::REP)
     @dispatcher = Dispatcher.new
+
+    connect!
+  end
+
+  def connect!
+    @socket.bind('tcp://*:5555')
   end
 
   def subscribe!
-    @redis.subscribe('whatsapp') do |on|
-      on.message do |channel, msg|
-        begin
-          hash = Hash.from_xml(msg)
-          @dispatcher.dispatch(hash)
-        rescue => e
-          p e.class
-          require 'pp'
-          pp e.backtrace
-          pp hash
-          pp msg
-        end
+    loop do
+      request = ''
+      @socket.recv_string(request)
+      puts "Received request. Data: #{request.inspect}" if request != ''
+      hash = Hash.from_xml(request) if request[0] == '<'
+      begin
+        @dispatcher.dispatch(hash)
+      rescue => e
+        require 'pp'
+        pp e.backtrace
+        pp hash
+        pp request
       end
+      @socket.send_string('')
     end
   end
 end
