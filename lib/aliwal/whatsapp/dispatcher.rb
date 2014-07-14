@@ -33,7 +33,8 @@ module Aliwal
 
           return unless group
 
-          group.messages.create(author: name, value: msg['body'][1..-1])
+          body = msg['body'][1..-1]
+          group.messages.create(author: name, value: body)
 
           @sender.send_message(from, body)
         end
