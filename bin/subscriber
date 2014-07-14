@@ -2,44 +2,8 @@
 $:.unshift(File.expand_path('../../lib', __FILE__))
 require File.expand_path('../../config/environment', __FILE__)
 
+require 'aliwal/zmq/receiver'
 
-require 'rubygems'
-require 'ffi-rzmq'
-require 'json'
-require 'nokogiri'
-require 'active_support/core_ext/hash/conversions'
-require 'dispatcher'
-
-class Subscriber
-  def initialize
-    @context = ZMQ::Context.new
-    @socket = @context.socket(ZMQ::REP)
-    @dispatcher = Dispatcher.new
-
-    connect!
-  end
-
-  def connect!
-    @socket.bind('tcp://*:5555')
-  end
-
-  def subscribe!
-    loop do
-      request = ''
-      @socket.recv_string(request)
-      puts "Received request. Data: #{request.inspect}" if request != ''
-      hash = Hash.from_xml(request) if request[0] == '<'
-      begin
-        @dispatcher.dispatch(hash)
-      rescue => e
-        require 'pp'
-        pp e.backtrace
-        pp hash
-        pp request
-      end
-      @socket.send_string('')
-    end
-  end
-end
-
-Subscriber.new.subscribe!
+subscriber = Aliwal::ZMQ::Receiver.new
+subscriber.bind
+subscriber.subscribe
