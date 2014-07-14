@@ -14,8 +14,9 @@ module Aliwal
 
       def send_message(jid, body)
         @socket.send_string(message(jid, body))
-        foo = ''
-        @socket.recv_string(foo)
+
+        response = ''
+        @socket.recv_string(response)
       end
 
       def message(jid, body)
