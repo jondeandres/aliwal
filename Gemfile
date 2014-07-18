@@ -42,6 +42,8 @@ gem 'redis'
 gem 'ffi-rzmq'
 gem 'nokogiri'
 gem 'byebug'
+gem 'pry'
+gem 'pry-doc'
 
 
 group :development, :test do
