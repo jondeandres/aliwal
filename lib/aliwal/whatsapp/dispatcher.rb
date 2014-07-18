@@ -8,8 +8,12 @@ module Aliwal
         @sender.connect
       end
 
-      def dispatch(hash)
+      def dispatch(request)
+        if request.text?
+          @sender.send_message(request.from, request.body.data)
+        end
       end
     end
+
   end
 end
