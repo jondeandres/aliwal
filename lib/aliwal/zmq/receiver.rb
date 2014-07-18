@@ -1,11 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'ffi-rzmq'
-require 'json'
-require 'nokogiri'
-require 'active_support/core_ext/hash/conversions'
 require 'aliwal/whatsapp/dispatcher'
-require 'pp'
+require 'aliwal/whatsapp/request'
 
 module Aliwal
   module ZMQ
@@ -22,18 +19,18 @@ module Aliwal
 
       def subscribe
         loop do
-          request = ''
-          @socket.recv_string(request)
-          hash = Hash.from_xml(request) if request[0] == '<'
+          @socket.recv_string(data = '')
+          request = Aliwal::Whatsapp::Request.create(data)
+
+          # TODO: Check if request.from is in request.to Redis Set.
+
 
           begin
-            @dispatcher.dispatch(hash)
+            @dispatcher.dispatch(request)
           rescue => e
-            pp e
-            pp e.backtrace
-            pp hash
+            # TODO: errbit
           ensure
-            @socket.send_string('received!')
+            @socket.send_string('')
           end
         end
       end

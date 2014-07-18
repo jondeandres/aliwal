@@ -1,0 +1,16 @@
+{
+  "from": "34635730544@s.whatsapp.net",
+  "data": null,
+  "tag": "message",
+  "t": "1405694940",
+  "nodes": {
+    "composing": {
+      "nodes": {
+      },
+      "tag": "composing",
+      "data": null,
+      "xmlns": "http://jabber.org/protocol/chatstates"
+    }
+  },
+  "type": "chat"
+}

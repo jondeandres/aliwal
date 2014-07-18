@@ -1,0 +1,31 @@
+{
+  "from": "34635730544@s.whatsapp.net",
+  "data": null,
+  "tag": "message",
+  "t": "1405695101",
+  "nodes": {
+    "body": {
+      "nodes": {
+      },
+      "tag": "body",
+      "data": "Zm9v\n"
+    },
+    "request": {
+      "nodes": {
+      },
+      "tag": "request",
+      "data": null,
+      "xmlns": "urn:xmpp:receipts"
+    },
+    "notify": {
+      "nodes": {
+      },
+      "tag": "notify",
+      "data": null,
+      "name": "Jon",
+      "xmlns": "urn:xmpp:whatsapp"
+    }
+  },
+  "type": "chat",
+  "id": "1405689098-32"
+}
