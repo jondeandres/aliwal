@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'ffi-rzmq'
+require 'json'
 require 'aliwal/whatsapp/dispatcher'
 require 'aliwal/whatsapp/request'
 
@@ -20,7 +21,7 @@ module Aliwal
       def subscribe
         loop do
           @socket.recv_string(data = '')
-          request = Aliwal::Whatsapp::Request.create(data)
+          request = Aliwal::Whatsapp::Request.new(JSON.parse(data))
 
           # TODO: Check if request.from is in request.to Redis Set.
 

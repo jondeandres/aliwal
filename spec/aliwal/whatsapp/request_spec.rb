@@ -1,11 +1,12 @@
 require 'spec_helper'
+require 'json'
 require 'aliwal/whatsapp/request'
 
 
 describe Aliwal::Whatsapp::Request do
-  let(:fixture) { request_fixture('body_and_notify') }
+  let(:fixture) { JSON.parse(request_fixture('body_and_notify')) }
 
-  subject { described_class.create(fixture) }
+  subject { described_class.new(fixture) }
 
   describe '#tag' do
     it { expect(subject.tag).to be_eql('message') }

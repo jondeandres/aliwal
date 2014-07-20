@@ -10,10 +10,6 @@ module Aliwal
 
       attr_reader :hash
 
-      def self.create(request)
-        new(JSON.parse(request))
-      end
-
       def initialize(hash)
         @hash = hash
       end
