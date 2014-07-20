@@ -1,7 +1,7 @@
 require 'ffi-rzmq'
 
 module Aliwal
-  module ZMQ
+  module Whatsapp
     class Sender
       def initialize
         @context = ::ZMQ::Context.new

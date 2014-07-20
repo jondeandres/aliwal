@@ -1,10 +1,10 @@
-require 'aliwal/zmq/sender'
+require 'aliwal/whatsapp/sender'
 
 module Aliwal
   module Whatsapp
     class Dispatcher
       def initialize
-        @sender = Aliwal::ZMQ::Sender.new
+        @sender = Aliwal::Whatsapp::Sender.new
         @sender.connect
       end
 
