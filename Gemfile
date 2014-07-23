@@ -1,4 +1,4 @@
-require File.expand_path('../lib/aliwal/modules_booter', __FILE__)
+require File.expand_path('../lib/aliwal/modules', __FILE__)
 
 source 'https://rubygems.org'
 
