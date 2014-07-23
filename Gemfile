@@ -1,5 +1,8 @@
+require File.expand_path('../lib/aliwal/modules_booter', __FILE__)
+
 source 'https://rubygems.org'
 
+Aliwal::Modules.load_gemfiles(self)
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
