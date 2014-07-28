@@ -1,4 +1,5 @@
-require File.expand_path('../lib/aliwal/modules', __FILE__)
+$:.unshift(File.expand_path('../lib', __FILE__))
+require 'aliwal/modules'
 
 source 'https://rubygems.org'
 
