@@ -1,3 +1,6 @@
+require 'active_support/core_ext/module/delegation'
+require 'aliwal/whatsapp_dispatcher/route'
+
 module Aliwal
   module WhatsappDispatcher
     class Routes
@@ -11,8 +14,8 @@ module Aliwal
         @routes = []
       end
 
-      def add_route(options)
-        @routes << Route.new(options)
+      def add_route(app, options)
+        @routes << Route.new(app, options)
       end
     end
   end

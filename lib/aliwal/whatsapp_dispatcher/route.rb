@@ -1,9 +1,10 @@
 module Aliwal
   module WhatsappDispatcher
     class Route
-      attr_reader :type, :options
+      attr_reader :app, :type, :options
 
-      def initialize(options)
+      def initialize(app, options)
+        @app = app
         @type = options.delete(:type)
         @options = options
       end

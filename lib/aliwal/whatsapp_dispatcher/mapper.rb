@@ -1,6 +1,8 @@
+require 'aliwal/whatsapp_dispatcher/mapping'
+
 module Aliwal
   module WhatsappDispatcher
-    SCOPE_OPTIONS = %i(prefix type)
+    SCOPE_OPTIONS = %i(prefix type separator)
 
     class Mapper
       def initialize(set)
@@ -13,7 +15,13 @@ module Aliwal
       end
 
       def text(regex, options = {})
-        options[:regex] = regex
+        prefix = options[:prefix] || @scope[:prefix]
+
+        regex.prepend("^#{prefix} ") if prefix
+
+        options[:regex] = /#{regex}/
+        options[:type] = :text
+
         add_route(options)
       end
 
@@ -39,7 +47,10 @@ module Aliwal
 
       def add_route(options)
         options.merge!(@scope)
-        @set.add_route(options)
+        mapping = Mapping.new(options)
+
+        app, _options = mapping.to_route
+        @set.add_route(app, _options)
       end
     end
   end

@@ -2,7 +2,7 @@
 
 require 'ffi-rzmq'
 require 'json'
-require 'aliwal/whatsapp/dispatcher'
+require 'aliwal/whatsapp_dispatcher/dispatcher'
 require 'aliwal/whatsapp/request'
 
 module Aliwal
@@ -11,29 +11,42 @@ module Aliwal
       def initialize
         @context = ::ZMQ::Context.new
         @socket = @context.socket(::ZMQ::REP)
-        @dispatcher = Aliwal::Whatsapp::Dispatcher.new
       end
 
       def bind
         @socket.bind('tcp://*:5555')
       end
 
+      def routes
+        Rails.application.modules.map(&:whatsapp_routes)
+      end
+
       def subscribe
         loop do
           @socket.recv_string(data = '')
-          request = Aliwal::Whatsapp::Request.new(JSON.parse(data))
-
-          # TODO: Check if request.from is in request.to Redis Set.
-
+          message = JSON.parse(data)
 
           begin
-            @dispatcher.dispatch(request)
+            dispatch(env_for(message))
           rescue => e
             # TODO: errbit
           ensure
             @socket.send_string('')
           end
         end
+      end
+
+      def dispatch(env)
+        routes.each do |route_set|
+          route_set.call(env)
+        end
+      end
+
+      def env_for(message)
+        {
+          'message' => message,
+          'request' => Aliwal::Whatsapp::Request.new(message)
+        }
       end
     end
   end
