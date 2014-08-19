@@ -2,7 +2,7 @@ require 'spec_helper'
 
 require 'aliwal/whatsapp_dispatcher/mapper'
 
-describe Aliwal::WhatsappDispatcher::Mapper do
+RSpec.describe Aliwal::WhatsappDispatcher::Mapper do
   describe '#text' do
 
   end

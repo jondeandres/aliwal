@@ -2,7 +2,7 @@ require 'spec_helper'
 
 require 'aliwal/whatsapp_dispatcher/route_set'
 
-describe Aliwal::WhatsappDispatcher::RouteSet do
+RSpec.describe Aliwal::WhatsappDispatcher::RouteSet do
   describe '#draw' do
     it 'calls instance_exec with the block in a Mapper instance' do
       expect_any_instance_of(Aliwal::WhatsappDispatcher::Mapper)

@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'aliwal/whatsapp_dispatcher/matchers/text'
 require 'aliwal/whatsapp_dispatcher/route'
 
-describe Aliwal::WhatsappDispatcher::Matchers::Text do
+RSpec.describe Aliwal::WhatsappDispatcher::Matchers::Text do
   let(:app) { proc { } }
   let(:env) do
     {

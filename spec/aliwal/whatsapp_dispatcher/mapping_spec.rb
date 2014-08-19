@@ -2,7 +2,7 @@ require 'spec_helper'
 
 require 'aliwal/whatsapp_dispatcher/mapping'
 
-describe Aliwal::WhatsappDispatcher::Mapping do
+RSpec.describe Aliwal::WhatsappDispatcher::Mapping do
   subject { described_class.new(options)}
 
   describe '#to_route' do

@@ -3,7 +3,7 @@ require 'json'
 require 'aliwal/whatsapp/request'
 
 
-describe Aliwal::Whatsapp::Request do
+RSpec.describe Aliwal::Whatsapp::Request do
   let(:fixture) { JSON.parse(request_fixture('body_and_notify')) }
 
   subject { described_class.new(fixture) }

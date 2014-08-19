@@ -2,7 +2,7 @@ require 'spec_helper'
 
 require 'aliwal/whatsapp_dispatcher/routes'
 
-describe Aliwal::WhatsappDispatcher::Routes do
+RSpec.describe Aliwal::WhatsappDispatcher::Routes do
   describe '#add_route' do
     it 'adds a new route to routes' do
       expect do
