@@ -18,7 +18,7 @@ describe Aliwal::WhatsappDispatcher::Matchers::Text do
     context 'matching the route regex' do
       let(:regex) { /^my\-prefix (.*)$/ }
       let(:request) do
-        double('request', body: 'my-prefix foo')
+        double('request', body: double(data: 'my-prefix foo'))
       end
 
       it 'returns true' do
@@ -29,7 +29,7 @@ describe Aliwal::WhatsappDispatcher::Matchers::Text do
     context 'no matching the route regex' do
       let(:regex) { /^my\-prefix (.*)$/ }
       let(:request) do
-        double('request', body: 'no-prefix foo')
+        double('request', body: double(data: 'no-prefix foo'))
       end
 
       it 'returns false' do
