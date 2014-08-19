@@ -1,6 +1,6 @@
 require 'json'
 require 'aliwal/whatsapp_dispatcher/dispatcher'
-require 'aliwal/whatsapp/request'
+require 'aliwal/whatsapp/input'
 
 module Aliwal
   module ZMQ
@@ -42,7 +42,7 @@ module Aliwal
       def env_for(message)
         {
           'message' => message,
-          'request' => Aliwal::Whatsapp::Request.new(message)
+          'whatsapp.input' => Aliwal::Whatsapp::Input.new(message)
         }
       end
     end

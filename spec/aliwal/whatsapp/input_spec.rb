@@ -1,9 +1,9 @@
 require 'spec_helper'
 require 'json'
-require 'aliwal/whatsapp/request'
+require 'aliwal/whatsapp/input'
 
 
-RSpec.describe Aliwal::Whatsapp::Request do
+RSpec.describe Aliwal::Whatsapp::Input do
   let(:fixture) { JSON.parse(request_fixture('body_and_notify')) }
 
   subject { described_class.new(fixture) }

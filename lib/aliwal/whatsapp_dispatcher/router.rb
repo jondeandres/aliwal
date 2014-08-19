@@ -16,14 +16,10 @@ module Aliwal
           matcher = matcher_for(env, route)
 
           if matcher.match?
-            # TODO: parse params to env
+            env['router.matcher'] = matcher
             yield(route)
           end
         end
-      end
-
-      def match?(env, route)
-
       end
 
       def matcher_for(env, route)

@@ -6,7 +6,7 @@ RSpec.describe Aliwal::WhatsappDispatcher::Matchers::Text do
   let(:app) { proc { } }
   let(:env) do
     {
-      'request' => request
+      'whatsapp.input' => request
     }
   end
 
