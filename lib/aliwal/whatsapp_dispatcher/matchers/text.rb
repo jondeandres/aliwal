@@ -9,10 +9,17 @@ module Aliwal
         def initialize(env, route)
           @env = env
           @route = route
+          @match = request.body.data.match(@route.regex)
         end
 
         def match?
-          !!(request.body.data =~ @route.regex)
+          !!@match
+        end
+
+        def params
+          return {} unless match?
+
+          Hash[@match.names.zip(@match.captures)].symbolize_keys
         end
       end
     end

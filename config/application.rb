@@ -3,6 +3,8 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 Bundler.require(*Rails.groups)
 
+require 'aliwal'
+
 module Aliwal
   class Application < Rails::Application
     def whatsapp_routes_reloader

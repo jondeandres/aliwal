@@ -10,17 +10,16 @@ describe Aliwal::WhatsappDispatcher::Matchers::Text do
     }
   end
 
+  let(:route) { Aliwal::WhatsappDispatcher::Route.new(app, regex: regex) }
+  let(:regex) { /^my\-prefix (?<text>.*)$/ }
+  let(:request) do
+    double('request', body: double(data: 'my-prefix foo'))
+  end
+
   subject { described_class.new(env, route) }
 
   describe '#match?' do
-    let(:route) { Aliwal::WhatsappDispatcher::Route.new(app, regex: regex) }
-
     context 'matching the route regex' do
-      let(:regex) { /^my\-prefix (.*)$/ }
-      let(:request) do
-        double('request', body: double(data: 'my-prefix foo'))
-      end
-
       it 'returns true' do
         expect(subject.match?).to be_eql(true)
       end
@@ -34,6 +33,27 @@ describe Aliwal::WhatsappDispatcher::Matchers::Text do
 
       it 'returns false' do
         expect(subject.match?).to be_eql(false)
+      end
+    end
+  end
+
+  describe '#params' do
+    context 'with matching data' do
+      it 'returns the params' do
+        params = subject.params
+        expect(params).to be_kind_of(Hash)
+        expect(params[:text]).to be_eql('foo')
+      end
+    end
+
+    context 'with no matching data' do
+      let(:request) do
+        double('request', body: double(data: 'no-prefix foo'))
+      end
+
+      it 'returns an empty hash' do
+        params = subject.params
+        expect(params).to be_eql({})
       end
     end
   end
