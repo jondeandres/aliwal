@@ -1,6 +1,3 @@
-#!/usr/bin/env ruby
-
-require 'ffi-rzmq'
 require 'json'
 require 'aliwal/whatsapp_dispatcher/dispatcher'
 require 'aliwal/whatsapp/request'
@@ -9,7 +6,7 @@ module Aliwal
   module ZMQ
     class Receiver
       def initialize
-        @context = ::ZMQ::Context.new
+        @context = ::Aliwal::ZMQ.context
         @socket = @context.socket(::ZMQ::REP)
       end
 

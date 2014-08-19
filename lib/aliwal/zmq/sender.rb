@@ -1,10 +1,10 @@
-require 'ffi-rzmq'
+require 'aliwal/zmq'
 
 module Aliwal
   module ZMQ
     class Sender
       def initialize
-        @context = ::ZMQ::Context.new
+        @context = ::Aliwal::ZMQ.context
         @socket = @context.socket(::ZMQ::REQ)
       end
 
