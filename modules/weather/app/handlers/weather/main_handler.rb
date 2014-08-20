@@ -24,6 +24,7 @@ END
 
     def not_found_place(error)
       send_text error['msg']
+      return
     end
 
     def current_weather
