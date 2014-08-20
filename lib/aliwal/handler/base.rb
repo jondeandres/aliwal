@@ -1,5 +1,6 @@
 require 'aliwal/handler/request'
 require 'active_support/core_ext/module/delegation'
+require 'aliwal/whatsapp'
 
 module Aliwal
   module Handler
@@ -26,6 +27,14 @@ module Aliwal
 
       def params
         @request.params
+      end
+
+      def send_text(to, text)
+        sender.send_message(to, text)
+      end
+
+      def sender
+        Aliwal::Whatsapp.sender
       end
     end
   end
