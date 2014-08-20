@@ -34,7 +34,7 @@ module Weather
     end
 
     def api_key
-      '54bccf1595b942a557514bcf6ac35846feab715b'
+      ENV['WORLDWEATHER_KEY']
     end
   end
 end
