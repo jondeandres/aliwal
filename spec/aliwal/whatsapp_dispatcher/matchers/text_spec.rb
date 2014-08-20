@@ -13,7 +13,7 @@ RSpec.describe Aliwal::WhatsappDispatcher::Matchers::Text do
   let(:route) { Aliwal::WhatsappDispatcher::Route.new(app, regex: regex) }
   let(:regex) { /^my\-prefix (?<text>.*)$/ }
   let(:request) do
-    double('request', body: double(data: 'my-prefix foo'))
+    double('request', text?: true, body: double(data: 'my-prefix foo'))
   end
 
   subject { described_class.new(env, route) }
@@ -28,7 +28,7 @@ RSpec.describe Aliwal::WhatsappDispatcher::Matchers::Text do
     context 'no matching the route regex' do
       let(:regex) { /^my\-prefix (.*)$/ }
       let(:request) do
-        double('request', body: double(data: 'no-prefix foo'))
+        double('request', text?: true, body: double(data: 'no-prefix foo'))
       end
 
       it 'returns false' do
@@ -48,7 +48,7 @@ RSpec.describe Aliwal::WhatsappDispatcher::Matchers::Text do
 
     context 'with no matching data' do
       let(:request) do
-        double('request', body: double(data: 'no-prefix foo'))
+        double('request', text?: true, body: double(data: 'no-prefix foo'))
       end
 
       it 'returns an empty hash' do
