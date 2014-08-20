@@ -1,9 +1,10 @@
 require 'json'
+require 'aliwal/zmq'
 require 'aliwal/whatsapp_dispatcher/dispatcher'
 require 'aliwal/whatsapp/input'
 
 module Aliwal
-  module ZMQ
+  module Whatsapp
     class Receiver
       def initialize
         @context = ::Aliwal::ZMQ.context

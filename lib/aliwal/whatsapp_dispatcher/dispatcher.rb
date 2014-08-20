@@ -1,5 +1,3 @@
-require 'aliwal/zmq/sender'
-
 module Aliwal
   module WhatsappDispatcher
     class Dispatcher
