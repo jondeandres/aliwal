@@ -16,5 +16,7 @@ module Aliwal
     def modules
       @modules ||= []
     end
+
+    config.after_initialize { whatsapp_routes_reloader.execute_if_updated }
   end
 end

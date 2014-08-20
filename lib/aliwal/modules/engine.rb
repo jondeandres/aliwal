@@ -17,8 +17,6 @@ module Aliwal
           if existing_paths.any?
             app.whatsapp_routes_reloader.paths.unshift(*existing_paths)
             app.whatsapp_routes_reloader.route_sets << routes
-
-            app.whatsapp_routes_reloader.execute_if_updated
           end
         end
 
