@@ -20,7 +20,7 @@ module Aliwal
       end
 
       def handler
-        handler_name = "#{@defaults[:handler]}Handler"
+        handler_name = "#{@defaults[:handler]}_handler"
         ActiveSupport::Dependencies.constantize(handler_name.camelize)
       end
     end
