@@ -10,16 +10,24 @@ module Weather
     private
 
     def current_weather_text(data)
+      not_found_place(data['error'][0]) if data['error']
+      current_data = data['current_condition'][0]
+      request_data = data['request'][0]
+
       <<-END
-Location: #{params[:place]}
-Description: #{data['weatherDesc'][0]['value']}
-Temperature: #{data['temp_C']}
-Humidity: #{data['humidity']}
+Location: #{request_data['query']}, #{request_data['type']}
+Description: #{current_data['weatherDesc'][0]['value']}
+Temperature: #{current_data['temp_C']}
+Humidity: #{current_data['humidity']}
 END
     end
 
+    def not_found_place(error)
+      send_text error['msg']
+    end
+
     def current_weather
-      Weather::Request.current(params[:place])
+      Weather::Request.request(params[:place])
     end
   end
 end

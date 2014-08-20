@@ -5,20 +5,15 @@ require 'json'
 
 module Weather
   class Request
-    def self.current(name)
-      new.current(name)
-    end
-
-    def current(name)
-      response = request(name)
-      response['data']['current_condition'][0]
+    def self.request(name)
+      new.request(name)
     end
 
     def request(name)
       uri = Addressable::URI.new(uri_params)
       uri.query = URI.encode_www_form(params(name))
 
-      JSON.parse(Net::HTTP.get(URI(uri.to_s)))
+      JSON.parse(Net::HTTP.get(URI(uri.to_s)))['data']
     end
 
     def params(name)
