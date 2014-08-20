@@ -9,7 +9,7 @@ module Aliwal
         def initialize(env, route)
           @env = env
           @route = route
-          @match = request.body.data.match(@route.regex)
+          @match = request.body.data.match(@route.regex) if request.text?
         end
 
         def match?

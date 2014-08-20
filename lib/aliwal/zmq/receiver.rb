@@ -26,7 +26,8 @@ module Aliwal
           begin
             dispatch(env_for(message))
           rescue => e
-            # TODO: errbit
+            puts e
+            puts e.backtrace.join("\n")
           ensure
             @socket.send_string('')
           end
