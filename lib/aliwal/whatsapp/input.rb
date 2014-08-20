@@ -3,7 +3,7 @@ require 'base64'
 
 module Aliwal
   module Whatsapp
-    class Request
+    class Input
       ATTRIBUTES = %w(tag type from to id retry xmlns nodes)
       NODES = %w(body request notify composing paused)
       TYPES = %w(error notification subject chat)
