@@ -4,13 +4,19 @@ require 'weather/request'
 module Weather
   class MainHandler < Aliwal::Handler::Base
     def current
-      send_text current_weather_text(current_weather)
+      data = current_weather
+
+      if data['error']
+        not_found_place(data['error'][0])
+      else
+        send_text current_weather_text(data)
+      end
+
     end
 
     private
 
     def current_weather_text(data)
-      not_found_place(data['error'][0]) if data['error']
       current_data = data['current_condition'][0]
       request_data = data['request'][0]
 
@@ -24,7 +30,6 @@ END
 
     def not_found_place(error)
       send_text error['msg']
-      return
     end
 
     def current_weather
