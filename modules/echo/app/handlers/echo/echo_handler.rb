@@ -9,5 +9,9 @@ module Echo
     def upcase
       send_text params[:text].upcase
     end
+
+    def reverse
+      send_text params[:text].reverse
+    end
   end
 end
