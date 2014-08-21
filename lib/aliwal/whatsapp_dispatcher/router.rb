@@ -15,10 +15,11 @@ module Aliwal
         @routes.each do |route|
           matcher = matcher_for(env, route)
 
-          if matcher.match?
-            env['router.matcher'] = matcher
-            yield(route)
-          end
+          next unless matcher.match?
+
+          env['router.matcher'] = matcher
+
+          yield(route)
         end
       end
 
