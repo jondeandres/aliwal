@@ -2,7 +2,11 @@ module Aliwal
   module Handler
     module Send
       def send_text(text)
-        sender.send_message(request.from, text)
+        sender.send_text(request.from, text)
+      end
+
+      def send_image(options = {})
+        sender.send_image(request.from, options)
       end
 
       def sender

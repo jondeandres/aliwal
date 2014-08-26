@@ -12,18 +12,30 @@ module Aliwal
         @socket.connect('tcp://127.0.0.1:5556')
       end
 
-      def send_message(jid, body)
-        @socket.send_string(message(jid, body))
+      def send_text(jid, text)
+        message = {
+          jid: jid,
+          body: text,
+          type: 'text'
+        }.to_json
+
+        send_frame(message)
+      end
+
+      def send_image(jid, options)
+        message = {
+          jid: jid,
+          type: 'url_image'
+        }.merge(options).to_json
+
+        send_frame(message)
+      end
+
+      def send_frame(object)
+        @socket.send_string(object)
 
         response = ''
         @socket.recv_string(response)
-      end
-
-      def message(jid, body)
-        {
-          jid: jid,
-          body: body
-        }.to_json
       end
     end
   end
