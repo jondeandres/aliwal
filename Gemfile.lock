@@ -1,4 +1,10 @@
 PATH
+  remote: modules/api
+  specs:
+    api (0.0.1)
+      rails (~> 4.1.1)
+
+PATH
   remote: modules/echo
   specs:
     echo (0.0.1)
@@ -169,6 +175,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  api!
   byebug
   coffee-rails (~> 4.0.0)
   echo!
