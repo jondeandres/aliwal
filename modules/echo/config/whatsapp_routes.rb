@@ -5,4 +5,8 @@ Echo::Engine.whatsapp_routes.draw do
   text '(?<text>.*)', to: 'echo/echo#reverse', prefix: 'Reverse'
   text 'About', to: 'echo/about#about'
   text 'About jon', to: 'echo/about#jon'
+
+  prefix 'Cv' do
+    text 'jon', to: 'echo/cv#jon'
+  end
 end
