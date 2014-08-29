@@ -18,11 +18,11 @@ gem 'spring',        group: :development
 gem 'redis'
 gem 'ffi-rzmq'
 gem 'nokogiri'
-gem 'byebug'
-gem 'pry'
-gem 'pry-doc'
-
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
+  gem 'byebug'
+  gem 'pry'
+  gem 'pry-doc'
+  gem 'simplecov'
 end
